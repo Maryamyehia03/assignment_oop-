@@ -17,7 +17,7 @@ bool temp = false;
 using namespace std;
 unsigned char image[SIZE][SIZE][RGB] ;
 unsigned char image2[SIZE][SIZE][RGB];
-//unsigned char image3[SIZE][SIZE];
+//unsigned char shuffled[SIZE][SIZE][RGB];
 
 void loadImage ();
 void saveImage ();
