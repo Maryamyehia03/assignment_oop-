@@ -115,6 +115,41 @@ void doSomethingForImage() {
         }
 //***********************************************************************************************************************
         case 4: {
+             //filter 4
+            cout<<"Enter 1 to flip horizontally & 2 to flip vertically \n ";
+            int x;
+            cin>>x;
+            if(x == 1){ // flipping image horizontally
+                unsigned char image2[SIZE][SIZE][RGB];
+                for(int i = 0;i<SIZE;i++){
+                    for(int j=0;j<SIZE;j++){
+                            for(int k = 0;k<3;k++){
+                                image2[i][j][k] = image[i][j][k]; // makes another copy for the image
+                            }        }
+                    }
+                for(int i = 0;i<SIZE;i++){
+                        for(int j=0;j<SIZE;j++){
+                            for(int k = 0;k<3;k++){
+                                image[i][j][k] = image2[255-i][j][k];   //flips the image    
+                            }
+                        }    }
+                }
+            else{
+                //flipping image vertically
+                   unsigned char image2[SIZE][SIZE][RGB];
+                    for(int i = 0;i<SIZE;i++){        
+                        for(int j=0;j<SIZE;j++){
+                            for(int k = 0;k<3;k++){                
+                                image2[i][j][k] = image[i][j][k]; // makes a copy for the image
+                            }        }
+                    }    for(int i = 0;i<SIZE;i++){
+                        for(int j=0;j<SIZE;j++){            
+                            for(int k = 0;k<3;k++){
+                                image[i][j][k] = image2[i][255-j][k];      // flips it 
+                            }
+                        }    }
+                }
+
             break;
         }
 //***********************************************************************************************************************
@@ -157,6 +192,21 @@ void doSomethingForImage() {
         }
 //***********************************************************************************************************************
         case 7: {
+            //filter 7
+            for(int i = 0;i<SIZE-1;i++){
+              for(int j=0;j<SIZE-1;j++){
+                for(int k = 0;k<3;k++){
+                  if (image2[i][j + 1][k] != image2[i][j - 1][k]) 
+                    image[i][j][k] = 0;                         // makes pixel black if its above pixel and lower different 
+                  else if (image2[i + 1][j][k] != image2[i - 1][j][k])
+                    image[i][j][k] = 0;                         // makes pixel black if its right and left different
+                  else
+                    image[i][j][k] = 255;
+
+            }
+        }
+    }
+
 
 
             break;
