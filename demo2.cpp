@@ -77,11 +77,27 @@ void doSomethingForImage() {
     if (x==3)temp= true;
     switch (x) {
         case 1: {
-
+          for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k < 3; ++k) {
+                        if (image[i][j][k] >= 128)
+                            image[i][j][k] = 0;       //black and white image
+                        else
+                            image[i][j][k] = 255;
+                    }
+                }
+            }
             break;
         }
 //***********************************************************************************************************************
         case 2: {
+         for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k < 3; ++k) {
+                        image[i][j][k] = 255 - image[i][j][k]; //inverse image
+                    }
+                }
+            }
 
             break;
         }
