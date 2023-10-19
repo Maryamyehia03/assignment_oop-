@@ -418,6 +418,63 @@ void doSomethingForImage() {
         }
 //***************************************************************************************************************************
         case 10: {
+            // Fiter a for mirror image
+            cout<<"Enter 1 for Left 1/2 image , 2 for Right 1/2 , 3 for  Upper 1/2 and 4 Lower 1/2 : ";
+            int n;cin>>n;
+            if(n == 1){ 
+                unsigned char image2[SIZE][SIZE][RGB];for(int i = 0;i<SIZE;i++){
+                for(int j=0;j<SIZE;j++){       
+                    for(int k=0;k<3;k++){
+                     image2[i][j][k] = image[i][j][k];       //makes a copy 
+                    }
+            }}  
+                for (int i = 0; i < SIZE; i++) {
+                     for (int j = 0; j< SIZE; j++) {        
+                         for(int k=0;k<3;k++){
+                            if(j > 128)            //copys the left half of the image annd copys it in the right half   
+                                image[i][j][k] = image2[i][255-j][k];
+                            else                
+                                image[i][j][k] = image2[i][j][k];
+                    }    }
+                  }
+            }
+            else if( n == 2){
+                //copys the right half of the image and copys it int left half
+                for(int i = 0;i<SIZE;i++){
+                   for(int j=0;j<SIZE;j++){         
+                       for(int k = 0;k<3;k++){
+                          image[i][j][k] = image[i][255-j][k];       
+                       }
+              }}
+            }
+            else if( n == 3){
+                unsigned char image2[SIZE][SIZE][RGB];
+                for(int i = 0;i<SIZE;i++){
+                   for(int j=0;j<SIZE;j++){       
+                       for(int k=0;k<3;k++){
+                        image2[i][j][k] = image[i][j][k];       
+                       }}
+                 } 
+                for (int i = 0; i < SIZE; i++) {    
+                    for (int j = 0; j< SIZE; j++) {
+                       for(int k=0;k<3;k++){           
+                           if(i > 128)        // copys the upper half and place it in the lower half
+                             image[i][j][k] = image2[255-i][j][k];           
+                           else
+                             image[i][j][k] = image2[i][j][k];       
+                       }
+                     }}
+            }
+            else{
+                for(int i = 0;i<SIZE;i++){
+                   for(int j=0;j<SIZE;j++){        
+                       for(int k =0;k<3;k++){
+                          image[i][j][k] = image[255-i][j][k];   //copys the lower half and place it in the upper half     
+                       }
+              }}
+
+            }
+            
 
             break;
         }
