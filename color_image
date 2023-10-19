@@ -21,8 +21,9 @@ unsigned char image2[SIZE][SIZE][RGB];
 
 void loadImage ();
 void saveImage ();
-void doSomethingForImage ();
 //void shuffleImage();
+void doSomethingForImage ();
+
 int main()
 {
 
