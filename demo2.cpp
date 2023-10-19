@@ -154,6 +154,39 @@ void doSomethingForImage() {
         }
 //***********************************************************************************************************************
         case 5: {
+    cout << "enter the degree";
+            int degree;
+            cin >> degree;
+            int image1[SIZE][SIZE][RGB];
+
+            for (int x = 0; x < SIZE; x++) {
+                for (int y = 0; y < SIZE; y++) {
+                    for (int z = 0; z < 3; ++z) {
+                        image1[x][y][z] = image[x][y][z];
+                    }
+                }
+            }
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k < 3; ++k) {
+                        image1[i][j][k] = image[i][j][k];
+                        if (degree == 90) {                                 //rotate 90 degree
+                            image[i][j][k] = image1[SIZE - 1 - j][i][k];
+                        }
+                            // Rotate Image
+                        else if (degree == 180) {
+                            image[i][j][k] = image1[j][SIZE - i - 1][k];          //rotate 180 degree
+                            image[i][j][k] = image1[j][SIZE - i - 1][k];
+
+
+                        } else if (degree == 270) {
+                            image1[SIZE - i - 1][j];                  //rotate 270 degree
+                            image[i][j][k] = image1[SIZE - i - 1][j][k];
+
+                        }
+                    }
+                }
+            }
 
 
             break;
@@ -213,6 +246,126 @@ void doSomethingForImage() {
         }
 //***************************************************************************************************************************
         case 8: {
+  unsigned char image2[SIZE][SIZE][RGB];
+            cout << "enter n\n";
+            int n;
+            cin >> n;
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k < 3; ++k) {
+                        image2[i][j][k] = image[i][j][k];
+                    }
+                }
+            }
+            if (n == 1) {                            //enlarge firt quarter
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+                            //    image2[i][j][k] = 255;                    //white background
+                        }
+                    }
+                }
+
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image2[i][j][k] = image[i / 2][j / 2][k / 2];
+                        }
+                    }
+                }
+
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image[i][j][k] = image2[i][j][k];
+                        }
+                    }
+                }
+            }
+            if (n == 2) {                               //enlarge second quarter
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+
+                        for (int k = 0; k < 3; ++k) {
+                            //  image2[i][j][k] = 255;
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+
+                        for (int k = 0; k < 3; ++k) {
+                            image2[i][j][k] = image[i / 2][j / 2][(k / 2) + 127];
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image[i][j][k] = image2[i][j][k];
+                        }
+                    }
+                }
+            }
+            if (n == 3) {                                    //enlarge third quarter
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            //    image2[i][j][k] = 255;
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image2[i][j][k] = image[(i / 2) + 127][(j / 2)][(k / 2)];
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image[i][j][k] = image2[i][j][k];
+                        }
+                    }
+                }
+            } else if (n == 4) {                            //enlarge fourth quarter
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            //    image2[i][j][k] = 255;
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image2[i][j][k] = image[(i / 2) + 127][(j / 2) + 127][(k / 2) + 127];
+                        }
+                    }
+                }
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        for (int k = 0; k < 3; ++k) {
+
+                            image[i][j][k] = image2[i][j][k];
+                        }
+
+                    }
+                }
+
+            }
+
+
+            
             break;
         }
 //***************************************************************************************************************************
@@ -295,7 +448,47 @@ void doSomethingForImage() {
             int z;
             cin >> z;
             if (z == 1) {
+ unsigned char copy[256][256][3];
+                for (int i = 0; i < 256; ++i) {
+                    for (int j = 0; j < 256; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            copy[i][j][k] = 255;
+                        }
+                    }
+                }
+                double rad, deg;
+                cout << "Enter degree\n";
+                cin >> deg;
+                rad = (deg * 22) / (180 * 7);
+                double len = tan(rad);
+                int x = 256 / (1 + tan(rad));
+                for (int i = 0; i < 256; ++i) {
+                    for (int j = 0; j < 256; j++) {
+                        for (int k = 0; k < 3; ++k) {
 
+                            copy[i][(j * x) / 256 ][k] = image[i][j][k]; //shrink by angle
+                        }
+                    }
+                }
+                for (int i = 0; i < 256; ++i) {
+                    for (int j = 0; j < 256; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            image[i][j][k] = 255;
+                        }
+                    }
+                }
+                double step = 256 - x;
+                double move = step / 256;
+                for (int i = 0; i < 256; ++i) {
+                    for (int j = 0; j < 256; ++j) {
+                        for (int k = 0; k < 3; ++k) {
+                            image[i][j + int(step)][k] = copy[i][j][k]; //skew horizontially
+
+                            step -= move;
+                        }
+                    }
+                }
+            }
             }
             else if (z == 2) {
                 unsigned char copy2[256][256][3];
