@@ -1,0 +1,397 @@
+// Program: demo2.cpp
+// Purpose: Demonstrate use of bmplip for handling
+//          bmp colored and grayscale images
+//          Program load a gray image and store in another file
+// Author:  Mohammad El-Ramly
+// Date:    30 March 2018
+// Version: 1.0
+float pi=(22/7);
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <cmath>
+#include "bmplib.cpp"
+#include "bmplib.h"
+bool temp = false;
+using namespace std;
+unsigned char image[SIZE][SIZE][RGB] ;
+unsigned char image2[SIZE][SIZE][RGB];
+//unsigned char image3[SIZE][SIZE];
+
+void loadImage ();
+void saveImage ();
+void doSomethingForImage ();
+
+int main()
+{
+
+    loadImage();
+  doSomethingForImage();
+  saveImage();
+  return 0;
+}
+
+//___________________________________________________________________________________________________________________________________________________
+void loadImage () {
+    char imageFileName[150];
+
+    // Get gray scale image file name
+    cout << "Enter the image file name: ";
+    cin >> imageFileName;
+                                                                //load  image
+    // Add to it .bmp extension and load image
+    strcat(imageFileName, ".bmp");
+    readRGBBMP(imageFileName, image);
+}
+
+void loadImage2 () {
+    char imageFileName2[100];
+
+    // Get gray scale image file name
+    cout << "Enter the  second image file name: ";
+    cin >> imageFileName2;                                       //load second image if user choose marge image
+
+    // Add to it .bmp extension and load image
+        strcat(imageFileName2, ".bmp");
+        readRGBBMP(imageFileName2, image2);
+}
+//______________________________________________________________________________________________________________________________________________________
+void saveImage () {
+   char imageFileName[100];
+
+   // Get gray scale image target file name
+   cout << "Enter the target image file name: ";
+   cin >> imageFileName;
+                                                                    //save image
+   // Add to it .bmp extension and load image
+   strcat (imageFileName, ".bmp");
+   writeRGBBMP(imageFileName, image);
+}
+
+//_______________________________________________________________________________________________________________________________________________________
+//
+//void doSomethingForImage() {
+//    cout<<"Choose \n1.Black and White Image \n2.Invert Image\n3.Merge Images\n4.Flip Image\n5.Rotate Image\n6.Darken or Lighten Image\n7. Detect Image Edges\n8. Enlarge Image\n9. Shrink Image\n10.Mirror Image\n11. Shuffle Image\n12. Blur Image\n13. Crop Image\n14. Skew Image\n0.Exit\n";
+//    int x;
+//    cin>>x;
+//    if (x==3)temp= true;
+//    switch (x) {
+//        case 1:
+//        {for (int i = 0; i < SIZE; i++) {
+//            for (int j = 0; j< SIZE; j++) {
+//                if(image[i][j] >= 128)
+//                    image[i][j] = 0;       //black and white image
+//                    else
+//                        image[i][j] = 255;
+//            }  }
+//            break;}
+////***********************************************************************************************************************
+//        case 2:
+//        { for (int i = 0; i < SIZE; i++) {
+//                for (int j = 0; j< SIZE; j++) {
+//                    image[i][j] = 255-image[i][j]; //inverse image
+//                }
+//        }
+//            break;}
+////***********************************************************************************************************************
+//        case 3:
+//        {  loadImage2();
+//            for (int i = 0; i < SIZE; i++) {
+//                for (int j = 0; j < SIZE; j++) {
+//                    image[i][j] = (image[i][j] + image2[i][j]) / 2; //merge image
+//                }
+//            }
+//            break;}
+////***********************************************************************************************************************
+//        case 4:
+//        {cout<<"Enter 1.horizontally \n2.vertically\n";
+//            int y;cin>>y;
+//            unsigned char copy[SIZE][SIZE];
+//            for (int i = 0; i < SIZE; i++) {
+//                for (int j = 0; j< SIZE; j++) {       //take copy
+//                    copy[i][j]=image[i][j];
+//                }
+//            }
+//
+//                                             //1
+//
+//            if(y==1){
+//                for (int i = 0; i < SIZE; i++) {
+//                    for (int j = 0; j< SIZE; j++) {
+//                        image[i][255-j]=copy[i][j];  //horizontially
+//                         }
+//                }
+//            }
+//                                            //2
+//
+//            else if(y==2){
+//                for (int i = 0; i < SIZE; i++) {
+//                    for (int j = 0; j< SIZE; j++) {
+//                        image[255-i][255-j]=copy[i][j];  //vertically
+//                    }
+//                }
+//            }
+//            break;}
+////***********************************************************************************************************************
+//        case 5:{
+//            cout<<"enter the degree";
+//            int degree;
+//            cin>>degree;
+//            int image1[SIZE][SIZE];
+//            for (int x = 0; x < SIZE; x++) {
+//                for (int y = 0; y < SIZE; y++) {
+//                    image1[x][y] = image[x][y];
+//                }
+//            }
+//
+//            for (int i = 0; i < SIZE; i++) {
+//                for (int j = 0; j< SIZE; j++) {
+//                    image1[i][j]=image[i][j];
+//                    if(degree==90){                                 //rotate 90 degree
+//                        image[i][j] = image1[SIZE-1-j][i];
+//                    }
+//                                                                                             // Rotate Image
+//                    else if(degree==180){
+//                        image[i][j]= image1[j][SIZE-i-1];          //rotate 180 degree
+//                        image[i][j]= image1[j][SIZE-i-1];
+//
+//
+//                    }
+//                    else if (degree==270){
+//                        image1[SIZE-i-1][j];                  //rotate 270 degree
+//                        image[i][j] = image1[SIZE-i-1][j];
+//
+//                    }
+//                }
+//            }
+//            break;}
+////***********************************************************************************************************************
+//        case 6:
+//        {cout << "1.Darker Image\n2.Lighten Image\n";
+//            int z;
+//            cin >> z;
+//                                         //1
+//            if (z == 1) {
+//                {
+//                    for (int i = 0; i < SIZE; i++) {
+//                        for (int j = 0; j < SIZE; j++) {
+//                            image[i][j] = image[i][j] / 3;             //darken image
+//                        }
+//                    }
+//                }
+//            }
+//
+//                                           //2
+//            else if (z == 2) {
+//                {
+//                    for (int i = 0; i < SIZE; i++){
+//                        for (int j = 0; j< SIZE; j++){
+//                            if (image[i][j]<120)
+//                                image[i][j]= (image[i][j])+90;           //light image
+//                        }
+//                    }
+//                }
+//            }
+//
+//            break;}
+////***********************************************************************************************************************
+//        case 7:{
+//unsigned char image2[SIZE][SIZE];
+//    for(int i = 0;i<SIZE;i++){
+//        for(int j=0;j<SIZE;j++){
+//            image2[i][j] = 255;
+//        }
+//    }
+//    for(int i = 0;i<SIZE;i++){
+//        for(int j=0;j<SIZE;j++){
+//            if(image[i][j] >= 115)
+//                image2[i][j] = 255;
+//            else
+//                image2[i][j] = 0;
+//        }
+//    }                                                    // Detect Image Edges
+//    for(int i = 0;i<SIZE;i++){
+//        for(int j=0;j<SIZE;j++){
+//            if( image2[i+1][j] != image2[i-1][j])
+//                image[i][j] = 0;
+//            else if( image2[i][j+1] != image2[i][j-1])
+//                image[i][j] = 0;
+//            else
+//                image[i][j] = 255;
+//        }
+//    }
+//break;}
+////***************************************************************************************************************************
+//    case 8:{
+//        break;}
+////***************************************************************************************************************************
+//    case 9:
+//        {
+//            cout<<"choose shrink the image dimensions to \n1. 1/2\n2. 1/3 \n3. 1/4 \n";
+//            int m;cin>>m;
+//            unsigned char copy2[SIZE][SIZE];
+//            for (int i = 0; i < SIZE ; ++i) {
+//                for (int j = 0; j < SIZE ; ++j) {
+//                    copy2[i][j]=image[i][j];
+//                }
+//            }
+//            for (int i = 0; i < SIZE ; ++i) {
+//                for (int j = 0; j < SIZE ; ++j) {
+//                    image[i][j]=255;
+//                }
+//            }
+//            if (m==1){
+//            for (int i = 0; i < SIZE ; ++i) {
+//                for (int j = 0; j < SIZE ; ++j) {
+//                    image[i/2][j/2]=copy2[i][j];                        //Shrink Image to 1/2
+//                }}
+//            }                                                                                          //Shrink Image
+//           else if (m==2){
+//            for (int i = 0; i < SIZE ; ++i) {
+//                for (int j = 0; j < SIZE ; ++j) {
+//                    image[i/3][j/3]=copy2[i][j];                       //Shrink Image to 1/3
+//                }}
+//           }
+//            else if (m==3){
+//            for (int i = 0; i < SIZE ; ++i) {
+//                for (int j = 0; j < SIZE ; ++j) {
+//                    image[i/4][j/4]=copy2[i][j];                         //Shrink Image to 1/4
+//                }}
+//            }
+//            break;
+//        }
+////***************************************************************************************************************************
+//        case 10:{
+//            cout<<"choose the image as seen here in order\n1. Left 1/2\n2. Right 1/2\n3. Upper 1/2 \n4. Lower 1/2";
+//            int z;cin>>z;
+//            unsigned char image2[SIZE][SIZE];
+//            for(int i = 0;i<SIZE;i++){
+//                for(int j=0;j<SIZE;j++){
+//                    image2[i][j] = image[i][j];
+//                }
+//            }
+//            if (z==1){
+//            for (int i = 0; i < SIZE; i++) {
+//                for (int j = 0; j< SIZE; j++) {
+//                    if(j > 128)
+//                        image[i][j] = image2[i][255-j];                     //left
+//                    else
+//                        image[i][j] = image2[i][j];
+//                }
+//            }}
+//            else if(z==2){
+//               // unsigned char image2[SIZE][SIZE];
+//                for(int i = 0;i<SIZE;i++){
+//                    for(int j=0;j<SIZE;j++){
+//                        image[i][j] = image[i][255-j];                      //right
+//                    }
+//                }
+//            }                                                                          //Mirror Image
+//            else if(z==3){
+//                for(int i = 0;i<SIZE;i++){
+//                    for(int j=0;j<SIZE;j++){
+//                        image2[i][j] = image[i][j];                    //lower
+//                    }
+//                }
+//                for (int i = 0; i < SIZE; i++) {
+//                    for (int j = 0; j< SIZE; j++) {
+//                        if(i > 128)
+//                            image[i][j] = image2[255-i][j];               //upper
+//                        else
+//                            image[i][j] = image2[i][j];
+//                    }
+//                }
+//            }
+//            else if(z==4){
+//                for(int i = 0;i<SIZE;i++){
+//                    for(int j=0;j<SIZE;j++){
+//                        image[i][j] = image[255-i][j];
+//                    }
+//                }
+//            }
+//            break;
+//        }
+////***************************************************************************************************************************
+//    case 12:{
+//        int avg=0;
+//        for (int i = 0; i < SIZE-3 ; ++i) {
+//            for (int j = 0; j < SIZE-3 ; ++j) {                                   // Blur Image
+//                avg+=image[i][j]+image[i+1][j+1]+image[i+2][j+2]+image[i+3][j+3]+image[i+4][j+4]+image[i+5][j+5]+image[i+6][j+6];
+//                image[i][j]=avg/7;
+//                avg=0;
+//            }
+//        }
+//        break;
+//    }
+////***************************************************************************************************************************
+//        case 13:{
+//            int x ,y ,len ,wid ;
+//            cout<<"Enter point x and y : ";
+//            cin>>x>>y;
+//            cout<<"Enter length and width : ";
+//            cin>>len>>wid;
+//            unsigned char image2[SIZE][SIZE];
+//
+//            for(int i = 0;i<SIZE;i++){
+//                for(int j=0;j<SIZE;j++){
+//                    image2[i][j] = image[i][j];
+//                }
+//            }                                                                  //Crop Image
+//
+//            for(int i = 0;i<SIZE;i++){
+//                for(int j=0;j<SIZE;j++){
+//                    image[i][j] = 255;
+//                }
+//            }
+//
+//            for(int i = x;i<x+wid;i++){
+//                for(int j=y;j<y+len;j++){
+//                    image[i][j] = image2[i][j];
+//                }
+//            }
+//            break;
+//        }
+////************************************************************************************************************************
+//    case 14:
+//{
+//    cout<<"choose Skew 1. Horizontally 2. Vertically ";
+//    int z;cin>>z;
+//    if(z==1){
+//
+//    }
+//    else if(z==2){
+//        unsigned char copy2[256][256];
+//        float ang,x;
+//        cout<<"Enter angle\n";
+//        cin>>ang;
+//        ang=(ang/180/7*22);
+//        ang= tan(ang);
+//        x=1-ang;
+//        for (int i = 0; i <256*(x) ; ++i) {
+//            for (int j = 0; j <256 ; ++j) {
+//                copy2[i][j]=image[int(i/x)][j];           //shrink by angle
+//            }
+//    }
+//    for (int i = 0; i < 256; ++i) {
+//        for (int j = 0; j < 256; ++j) {
+//            image[i][j]=255;
+//        }
+//    }
+//
+//    for (int i = 0; i < 256*x; ++i) {
+//        for (int j = 0; j <256 ; ++j) {
+//           image[i+(int((256-j)*ang))][j]=copy2[i][j];      //skew vertically
+//        }
+//    }
+//    }
+//    break;
+//}
+////***************************************************************************************************************************
+//        default:
+//            break;
+//    }
+//}
+//------------------------------------------------------------------------------------------------------------------------
+void doSomethingForImage() {
+
+}
