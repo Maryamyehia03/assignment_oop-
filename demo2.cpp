@@ -472,7 +472,8 @@ void doSomethingForImage() {
             int z;
             cin >> z;
             if (z == 1) {
- unsigned char copy[256][256][3];
+
+                  unsigned char copy[256][256][3];
                 for (int i = 0; i < 256; ++i) {
                     for (int j = 0; j < 256; ++j) {
                         for (int k = 0; k < 3; ++k) {
@@ -489,31 +490,32 @@ void doSomethingForImage() {
                 for (int i = 0; i < 256; ++i) {
                     for (int j = 0; j < 256; j++) {
                         for (int k = 0; k < 3; ++k) {
+                            copy[i][int((j * x) / 256)][k] = image[i][j][k]; //shrink by angle
 
-                            copy[i][(j * x) / 256 ][k] = image[i][j][k]; //shrink by angle
                         }
-                    }
-                }
-                for (int i = 0; i < 256; ++i) {
-                    for (int j = 0; j < 256; ++j) {
-                        for (int k = 0; k < 3; ++k) {
-                            image[i][j][k] = 255;
-                        }
-                    }
-                }
-                double step = 256 - x;
-                double move = step / 256;
-                for (int i = 0; i < 256; ++i) {
-                    for (int j = 0; j < 256; ++j) {
-                        for (int k = 0; k < 3; ++k) {
-                            image[i][j + int(step)][k] = copy[i][j][k]; //skew horizontially
 
-                            step -= move;
-                        }
                     }
                 }
-            }
-            }
+                   for (int i = 0; i < 256; ++i) {
+                       for (int j = 0; j < 256; ++j) {
+                           for (int k = 0; k < 3; ++k) {
+                               image[i][j][k] = 255;
+                           }
+                       }
+                   }
+                   double step = 256 - x;
+                   double move = step / 256;
+                   for (int i = 0; i < 256; ++i) {
+                       for (int j = 0; j < 256; ++j) {
+                           for (int k = 0; k < 3; ++k) {
+                               image[i][j + int(step)][k] = copy[i][j][k]; //skew horizontially
+                           }
+                       }
+                               step -= move;
+                           }
+                       }
+
+
             else if (z == 2) {
                 unsigned char copy2[256][256][3];
                 float ang, x;
