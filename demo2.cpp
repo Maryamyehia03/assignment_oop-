@@ -1,3 +1,13 @@
+// Program: demo2.cpp
+// Purpose: Demonstrate use of bmplip for handling
+//          bmp  grayscale images
+//          Program load a gray image and store in another file
+// Author 1:  Mariam Mostafa Mostafa
+// Author 2: Marwa Haron Saad
+// Author 3: Ola Abdullah Hassan
+// Date:    19 / 10 / 2023
+// Version: 1.0
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
