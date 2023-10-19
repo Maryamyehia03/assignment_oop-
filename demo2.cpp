@@ -438,7 +438,31 @@ void doSomethingForImage() {
             break;
         }
 //***************************************************************************************************************************
-        case 13: {
+        case 13: { //filter d : cropping image
+            int x,y,len,wid;
+    unsigned char image2[SIZE][SIZE][RGB];
+    cout<<"Enter point x and y :";cin>>x>>y;
+    cout<<"Enter length and width : ";cin>>len>>wid;
+    for(int i = 0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
+            for(int k =0;k<3;k++){
+                image2[i][j][k] = image[i][j][k]; // make a copy for image
+        }
+        }
+    }
+    for(int i = 0;i<SIZE;i++){
+        for(int j=0;j<SIZE;j++){
+            for(int k=0;k<3;k++){
+                image[i][j][k] = 255; // makes the original image all white
+            }
+        }    }
+    for(int i = x;i<x+wid;i++){
+        for(int j=y;j<y+len;j++){
+            for(int k=0;k<3;k++){
+                image[i][j][k] = image2[i][j][k]; // copys from the second image to the first the part  that starts from point(x,y) and has length len  , width wid 
+            }
+        }
+    }
 
             break;
         }
