@@ -479,6 +479,60 @@ void doSomethingForImage() {
             break;
         }
 //***************************************************************************************************************************
+        case 11:{
+            
+void moveQuarter(int idx, int i, int j,int y) {
+
+    int temp = j;
+    if (idx == 1)                                          //  first quarter
+        for (int k = 0; k < SIZE / 2; i++, k++) {
+            j = temp;
+            for (int z = 0; z < SIZE / 2; j++, z++)
+                for (int y = 0; y < 3; ++y) {
+                    image2[i][j][y] = image[k][z][y];
+                }
+        }
+    else if (idx == 2)                               //second quarter
+        for (int k = 0; k < SIZE / 2; i++, k++) {
+            j = temp;
+            for (int z = SIZE / 2; z < SIZE; j++, z++)
+                for (int y = 0; y < 3; ++y) {
+                    image2[i][j][y] = image[k][z][y];
+                }
+        }
+    else if (idx == 3)                                  //third quarter
+        for (int k = SIZE / 2; k < SIZE; i++, k++) {
+            j = temp;
+            for (int z = 0; z < SIZE / 2; j++, z++)
+                for (int y = 0; y < 3; ++y) {
+                    image2[i][j][y] = image[k][z][y];
+                }
+        }
+    else if (idx == 4)                                   //fourth quarter
+        for (int k = SIZE / 2; k < SIZE; i++, k++) {
+            j = temp;
+            for (int z = SIZE / 2; z < SIZE; j++, z++)
+                for (int y = 0; y < 3; ++y) {
+                    image2[i][j][y] = image[k][z][y];
+                }
+        }
+}
+void doSomethingForImage() {
+    int n;
+    cerr << "Enter the order of quarters you want: ";
+    for (int i = 0; i < 4; i++) {
+
+            cin >> n;
+            if (i == 0) moveQuarter(n, 0, 0,0);
+            else if (i == 1) moveQuarter(n, 0,0, SIZE / 2);
+            else if (i == 2) moveQuarter(n, SIZE / 2, 0,0);
+            else if (i == 3) moveQuarter(n, SIZE / 2, SIZE / 2,SIZE / 2);
+        }
+    }
+         break;
+        }
+//***************************************************************************************************************************
+        
         case 12: {
             int avg = 0;
             for (int i = 0; i < SIZE - 3; ++i) {
